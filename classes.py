@@ -2,6 +2,8 @@ import re
 
 from config import data_lang
 
+import config as cfg
+
 """
 text = "dffF"
 print(bool(re.search(r"[A-Z]", text)))"""
@@ -63,11 +65,46 @@ class Checked:
         text = [score, messages]
 
         return text
+    
 
-password = input("Password: ")
+    def check_in_popular_password(self, password: str) -> list:
+        """"""
+        message_box = data_lang["second-check"]
+
+        score = 0
+        messages = []
+
+        common_pass = cfg.common_password
+
+        for i in common_pass:
+            if (password.lower()) == (i.lower()):
+                score += -100
+                messages.append(message_box["check-false"])
+                break
+
+        for i in common_pass:
+            if score <= -100:
+                break
+
+            elif (i.lower() in password.lower()) and (len(i) > 3):
+                score -= 50
+                messages.append((str(message_box["check-maybe"]).replace("<password>", f"{i}")))
+                break
+        
+        if score >= 0:
+            score += 50
+            messages.append(message_box["check-true"])
+
+
+        text = [score, messages]
+
+        return text
+
+password = str(input("Password: "))
 
 test = Checked()
-m1 = test.check_length_and_complexity(password)
+#m1 = test.check_length_and_complexity(password)
+m1 = test.check_in_popular_password(password)
 score = m1[0]
 messages = m1[1]
 

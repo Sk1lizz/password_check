@@ -1,5 +1,3 @@
-import re
+text1 = "test123123123"
 
-text = "1qwertyQWERTY"
-
-print(bool(re.search(r"[!\"#$%&\'()*+,\-./:;<=>?@\[\\\]^_`{|}~]", text)))
+text2 = "test"
