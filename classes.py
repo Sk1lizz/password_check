@@ -1,4 +1,5 @@
 import re
+import math
 
 from config import data_lang
 
@@ -29,7 +30,7 @@ class Checked:
                 messages.append(message_box["len-15"])
         
         else:
-            score += -5
+            score += -15
             messages.append(message_box["len-7"])
 
 
@@ -60,6 +61,15 @@ class Checked:
         else:
             score += -5 
             messages.append(message_box["not Special Character"])
+        
+        """"""
+        if bool(re.search(r"\d", password)):
+            score += 10
+            messages.append(message_box["numbers"])
+        
+        else:
+            score += -2.5 
+            messages.append(message_box["not numbers"])
 
 
         text = [score, messages]
@@ -100,11 +110,40 @@ class Checked:
 
         return text
 
-password = str(input("Password: "))
+    
+    def check_entropy(self, password: str) -> int:
+        number_bits = 0
 
+        alphabet = 0
+
+        alphabet_dictionaries = {
+            r"[A-Z]": 26,
+            r"[a-z]": 26,
+            r"[А-Я]": 33,
+            r"[а-я]": 33,
+            r"[!\"#$%&\'()*+,\-./:;<=>?@\[\\\]^_`{|}~]": 40,
+            r"\d": 10
+        }
+
+        for i in alphabet_dictionaries.keys():
+            if bool(re.search(i, password)):
+                alphabet += int(alphabet_dictionaries[str(i)])
+
+        if alphabet <= 0: alphabet = 1
+
+
+        number_bits = len(password) * math.log2(alphabet)
+
+        return round(number_bits, 2)
+
+
+#password = str(input("Password: "))
+
+
+"""
 test = Checked()
-#m1 = test.check_length_and_complexity(password)
-m1 = test.check_in_popular_password(password)
+m1 = test.check_length_and_complexity(password)
+#m1 = test.check_in_popular_password(password)
 score = m1[0]
 messages = m1[1]
 
@@ -112,3 +151,4 @@ print(f"Score: {score}\n\n")
 
 for i in messages:
     print(f"Messages: {i}\n")
+"""

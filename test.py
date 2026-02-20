@@ -1,3 +1,5 @@
-text1 = "test123123123"
+import classes
 
-text2 = "test"
+password = str(input("Password: "))
+
+print(classes.Checked().check_entropy(password))
