@@ -93,7 +93,7 @@ class Checked:
                 break
 
         for i in common_pass:
-            if score <= -100:
+            if score <= -100 or len(password) >= 16:
                 break
 
             elif (i.lower() in password.lower()) and (len(i) > 3):

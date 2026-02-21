@@ -6,24 +6,28 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>750</height>
+    <width>750</width>
+    <height>900</height>
    </rect>
   </property>
   <property name="minimumSize">
-   <size>
-    <width>500</width>
-    <height>600</height>
-   </size>
-  </property>
-  <property name="maximumSize">
    <size>
     <width>750</width>
     <height>900</height>
    </size>
   </property>
+  <property name="maximumSize">
+   <size>
+    <width>1500</width>
+    <height>1800</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Анализатор паролей</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="config.qrc">
+    <normaloff>:/icon/config/app/icon.png</normaloff>:/icon/config/app/icon.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget {
@@ -48,6 +52,12 @@ QPushButton:hover {
 
 QPushButton:pressed {
     background-color: #6d6d75;
+}
+
+QProgressBar {
+	border: 2px solid #555555;
+    border-radius: 5px;
+    background-color: #3c3c3c;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -215,7 +225,7 @@ QPushButton:pressed {
       <item>
        <widget class="QProgressBar" name="status_bar">
         <property name="value">
-         <number>50</number>
+         <number>0</number>
         </property>
         <property name="textVisible">
          <bool>false</bool>
@@ -265,7 +275,7 @@ QPushButton:pressed {
        <string notr="true">font-size: 16pt;</string>
       </property>
       <property name="text">
-       <string>Результат: Отличный</string>
+       <string>Результат: </string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -295,8 +305,8 @@ QPushButton:pressed {
       </property>
       <property name="text">
        <string>Подробный отчет
-Общее количество очков: &lt;score&gt;
-Энтропия пароля: &lt;score_entropy&gt;</string>
+Общее количество очков: 
+Энтропия пароля: </string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -321,10 +331,11 @@ QPushButton:pressed {
     </item>
     <item>
      <layout class="QGridLayout" name="layout_full_text">
-      <item row="0" column="2">
-       <widget class="QLabel" name="lbl_second_text">
+      <item row="0" column="1" rowspan="2">
+       <widget class="QLabel" name="lbl_first_text">
         <property name="text">
-         <string>Количество очков: &lt;score&gt; Вывод: -</string>
+         <string>Длина пароля:  Количество очков: 
+Вывод:</string>
         </property>
        </widget>
       </item>
@@ -344,21 +355,7 @@ QPushButton:pressed {
         </property>
        </spacer>
       </item>
-      <item row="0" column="1" rowspan="2">
-       <widget class="QLabel" name="lbl_first_text">
-        <property name="text">
-         <string>Длина пароля: &lt;len&gt; Количество очков: &lt;score&gt;
-Вывод: 
--
--
--
--
--
--</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3" rowspan="2">
+      <item row="0" column="4" rowspan="2">
        <spacer name="spacer2_3">
         <property name="orientation">
          <enum>Qt::Orientation::Horizontal</enum>
@@ -374,13 +371,42 @@ QPushButton:pressed {
         </property>
        </spacer>
       </item>
-      <item row="1" column="2">
-       <widget class="QLabel" name="lbl_therd_text">
+      <item row="0" column="3">
+       <widget class="QLabel" name="lbl_second_text">
         <property name="text">
-         <string>Энтропия пароля: &lt;score_entropy&gt; бит
+         <string>Количество очков:  Вывод: </string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLabel" name="lbl_third_text">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Энтропия пароля:  
 Вывод:</string>
         </property>
        </widget>
+      </item>
+      <item row="0" column="2" rowspan="2">
+       <spacer name="spacer1_6">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>25</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </item>
@@ -491,6 +517,8 @@ QPushButton:pressed {
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="config.qrc"/>
+ </resources>
  <connections/>
 </ui>

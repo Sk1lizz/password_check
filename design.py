@@ -8,14 +8,18 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QLabel,
     QLineEdit, QMainWindow, QProgressBar, QPushButton,
     QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
+import config_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(600, 750)
-        MainWindow.setMinimumSize(QSize(500, 600))
-        MainWindow.setMaximumSize(QSize(750, 900))
+        MainWindow.resize(750, 900)
+        MainWindow.setMinimumSize(QSize(750, 900))
+        MainWindow.setMaximumSize(QSize(1500, 1800))
+        icon = QIcon()
+        icon.addFile(u":/icon/config/app/icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(u"QWidget {\n"
 "    background-color: #3C3C43;\n"
 "    font-size: 11pt;\n"
@@ -38,6 +42,12 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton:pressed {\n"
 "    background-color: #6d6d75;\n"
+"}\n"
+"\n"
+"QProgressBar {\n"
+"	border: 2px solid #555555;\n"
+"    border-radius: 5px;\n"
+"    background-color: #3c3c3c;\n"
 "}")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -71,8 +81,6 @@ class Ui_MainWindow(object):
         self.layou_input_button.addItem(self.spacer1_2)
 
         self.le_password = QLineEdit(self.centralwidget)
-        self.le_password.setPlaceholderText("Введите пароль...")
-        self.le_password.setEchoMode(QLineEdit.EchoMode.Password)
         self.le_password.setObjectName(u"le_password")
 
         self.layou_input_button.addWidget(self.le_password)
@@ -106,7 +114,7 @@ class Ui_MainWindow(object):
 
         self.status_bar = QProgressBar(self.centralwidget)
         self.status_bar.setObjectName(u"status_bar")
-        self.status_bar.setValue(50)
+        self.status_bar.setValue(0)
         self.status_bar.setTextVisible(False)
 
         self.layout_status_bar.addWidget(self.status_bar)
@@ -146,28 +154,33 @@ class Ui_MainWindow(object):
 
         self.layout_full_text = QGridLayout()
         self.layout_full_text.setObjectName(u"layout_full_text")
-        self.lbl_second_text = QLabel(self.centralwidget)
-        self.lbl_second_text.setObjectName(u"lbl_second_text")
-
-        self.layout_full_text.addWidget(self.lbl_second_text, 0, 2, 1, 1)
-
-        self.spacer1_3 = QSpacerItem(10, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-        self.layout_full_text.addItem(self.spacer1_3, 0, 0, 2, 1)
-
         self.lbl_first_text = QLabel(self.centralwidget)
         self.lbl_first_text.setObjectName(u"lbl_first_text")
 
         self.layout_full_text.addWidget(self.lbl_first_text, 0, 1, 2, 1)
 
+        self.spacer1_3 = QSpacerItem(10, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.layout_full_text.addItem(self.spacer1_3, 0, 0, 2, 1)
+
         self.spacer2_3 = QSpacerItem(10, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.layout_full_text.addItem(self.spacer2_3, 0, 3, 2, 1)
+        self.layout_full_text.addItem(self.spacer2_3, 0, 4, 2, 1)
 
-        self.lbl_therd_text = QLabel(self.centralwidget)
-        self.lbl_therd_text.setObjectName(u"lbl_therd_text")
+        self.lbl_second_text = QLabel(self.centralwidget)
+        self.lbl_second_text.setObjectName(u"lbl_second_text")
 
-        self.layout_full_text.addWidget(self.lbl_therd_text, 1, 2, 1, 1)
+        self.layout_full_text.addWidget(self.lbl_second_text, 0, 3, 1, 1)
+
+        self.lbl_third_text = QLabel(self.centralwidget)
+        self.lbl_third_text.setObjectName(u"lbl_third_text")
+        self.lbl_third_text.setMinimumSize(QSize(0, 0))
+
+        self.layout_full_text.addWidget(self.lbl_third_text, 1, 3, 1, 1)
+
+        self.spacer1_6 = QSpacerItem(25, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.layout_full_text.addItem(self.spacer1_6, 0, 2, 2, 1)
 
 
         self.verticalLayout_2.addLayout(self.layout_full_text)
@@ -217,27 +230,21 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"\u0410\u043d\u0430\u043b\u0438\u0437\u0430\u0442\u043e\u0440 \u043f\u0430\u0440\u043e\u043b\u0435\u0439", None))
         self.lbl_main_name.setText(QCoreApplication.translate("MainWindow", u"\U0001f510 \U00000410\U0000043d\U00000430\U0000043b\U00000438\U00000437\U00000430\U00000442\U0000043e\U00000440 \U0000043d\U00000430\U00000434\U00000451\U00000436\U0000043d\U0000043e\U00000441\U00000442\U00000438 \U0000043f\U00000430\U00000440\U0000043e\U0000043b\U00000435\U00000439", None))
         self.btn_start.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u043e\u0432\u0435\u0440\u0438\u0442\u044c \u043f\u0430\u0440\u043e\u043b\u044c", None))
 #if QT_CONFIG(shortcut)
         self.btn_start.setShortcut(QCoreApplication.translate("MainWindow", u"Return", None))
 #endif // QT_CONFIG(shortcut)
         self.status_bar.setFormat("")
-        self.lbl_result.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442: \u041e\u0442\u043b\u0438\u0447\u043d\u044b\u0439", None))
+        self.lbl_result.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442: ", None))
         self.lbl_full_result.setText(QCoreApplication.translate("MainWindow", u"\u041f\u043e\u0434\u0440\u043e\u0431\u043d\u044b\u0439 \u043e\u0442\u0447\u0435\u0442\n"
-"\u041e\u0431\u0449\u0435\u0435 \u043a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u043e\u0447\u043a\u043e\u0432: <score>\n"
-"\u042d\u043d\u0442\u0440\u043e\u043f\u0438\u044f \u043f\u0430\u0440\u043e\u043b\u044f: <score_entropy>", None))
-        self.lbl_second_text.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u043e\u0447\u043a\u043e\u0432: <score>\u2028\u0412\u044b\u0432\u043e\u0434:\u2028-", None))
-        self.lbl_first_text.setText(QCoreApplication.translate("MainWindow", u"\u0414\u043b\u0438\u043d\u0430 \u043f\u0430\u0440\u043e\u043b\u044f: <len>\u2028\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u043e\u0447\u043a\u043e\u0432: <score>\n"
-"\u0412\u044b\u0432\u043e\u0434: \n"
-"-\n"
-"-\n"
-"-\n"
-"-\n"
-"-\n"
-"-", None))
-        self.lbl_therd_text.setText(QCoreApplication.translate("MainWindow", u"\u042d\u043d\u0442\u0440\u043e\u043f\u0438\u044f \u043f\u0430\u0440\u043e\u043b\u044f: <score_entropy> \u0431\u0438\u0442\n"
+"\u041e\u0431\u0449\u0435\u0435 \u043a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u043e\u0447\u043a\u043e\u0432: \n"
+"\u042d\u043d\u0442\u0440\u043e\u043f\u0438\u044f \u043f\u0430\u0440\u043e\u043b\u044f: ", None))
+        self.lbl_first_text.setText(QCoreApplication.translate("MainWindow", u"\u0414\u043b\u0438\u043d\u0430 \u043f\u0430\u0440\u043e\u043b\u044f: \u2028\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u043e\u0447\u043a\u043e\u0432: \n"
+"\u0412\u044b\u0432\u043e\u0434:", None))
+        self.lbl_second_text.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u043e\u0447\u043a\u043e\u0432: \u2028\u0412\u044b\u0432\u043e\u0434:\u2028", None))
+        self.lbl_third_text.setText(QCoreApplication.translate("MainWindow", u"\u042d\u043d\u0442\u0440\u043e\u043f\u0438\u044f \u043f\u0430\u0440\u043e\u043b\u044f:  \n"
 "\u0412\u044b\u0432\u043e\u0434:", None))
         self.btn_hide_password.setText(QCoreApplication.translate("MainWindow", u"\u041f\u043e\u043a\u0430\u0437\u0430\u0442\u044c \u043f\u0430\u0440\u043e\u043b\u044c", None))
         self.btn_copy.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u043f\u0430\u0440\u043e\u043b\u044c", None))
